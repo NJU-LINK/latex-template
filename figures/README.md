@@ -1,7 +1,7 @@
 # NJU-LINK Logo
 
-左侧蓝紫图形沿用原始 Logo，LINK 字标采用 **Quicksand Bold（700）**，
-以圆润端点和更轻的几何线条协调图形，并调整字距与垂直对齐。
+左侧蓝紫图形沿用原始 Logo，LINK 字标在 **Quicksand Bold（700）** 的基础上
+加厚笔画，保留圆润端点，并略微降低字高、收紧字距，让小尺寸页眉也清晰醒目。
 
 - `njulink-logo-transparent.png`：透明背景，供 LaTeX 首页与页眉使用。
 - `njulink-logo.png`：白底 PNG，适用于白底文档。
