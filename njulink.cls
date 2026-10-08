@@ -301,16 +301,15 @@
   before skip=10pt,after skip=10pt,coltext=LinkText,
   parbox=false}}
 \newenvironment{abstractbox}
-  {\begin{tcolorbox}[njulink panel,colback=LinkPanel,
-    borderline west={2pt}{0pt}{LinkBlue}]\small}
+  {\begin{tcolorbox}[njulink panel,colback=LinkPanel]\small}
   {\end{tcolorbox}}
 \newtcolorbox{njubox}[1][]{njulink panel,
-  colback=LinkLavender,borderline west={2pt}{0pt}{LinkPurple},
+  colback=LinkLavender,
   coltitle=LinkNavy,fonttitle=\sffamily\small\bfseries,
   attach title to upper={\par\vspace{4pt}},fontupper=\small,#1}
 % Compatibility with existing TokenWave and FAIR document bodies.
 \newtcolorbox{twbox}[1][]{njulink panel,
-  colback=LinkLavender,borderline west={2pt}{0pt}{LinkPurple},#1}
+  colback=LinkLavender,#1}
 \colorlet{metablue}{LinkBlue}
 \colorlet{metafg}{LinkText}
 \colorlet{metabg}{LinkPanel}
