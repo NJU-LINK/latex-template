@@ -1,0 +1,172 @@
+% !TeX program = xelatex
+% NJU-LINK technical report. Recommended Overleaf compiler: XeLaTeX.
+% The original FAIR / TokenWave front-matter commands are preserved.
+% Change the metadata below and replace the demonstration text.
+\documentclass[10pt]{njulink}
+
+\njulinksetup{
+  type={Technical Report},
+  id={NJU-LINK / RESEARCH SERIES},
+  short-title={NJU-LINK Technical Report},
+  subtitle={A clear format for ideas, methods, and evidence},
+  keywords={Research reports; reproducibility; scientific communication}
+}
+
+\title{NJU-LINK\\Technical Report}
+\author[1]{First Author}
+\author[1,2]{Second Author}
+\author[1]{Third Author}
+\affiliation[1]{NJU-LINK}
+\affiliation[2]{Affiliation Two}
+% \contribution[*]{Equal contribution}
+% \correspondence{First Author at \email{name@example.org}}
+% \metadata[Code]{\url{https://example.org/project}}
+\date{October 2026}
+
+\abstract{%
+A research report should make its question, method, and evidence easy to find.
+This template provides a consistent structure for NJU-LINK technical reports,
+working papers, and research notes. A compact identity block, a restrained
+blue--violet palette, and a readable text column establish the visual hierarchy.
+The following pages demonstrate headings, author affiliations, citations,
+a vector figure, an equation, and a comparison table. This is a typesetting
+example; it does not describe an empirical study or report experimental results.
+}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+\label{sec:introduction}
+Start with the research problem and the observation that makes it worth
+investigating. Define the setting precisely enough for the reader to understand
+what is being measured, which assumptions matter, and where the proposed
+approach is expected to apply. A concrete example often communicates the
+motivation more effectively than a broad statement about the field.
+
+Then connect the limitation of current practice, the idea that addresses it,
+and the evidence used to evaluate that idea. State each contribution at the
+level supported by the results. The method appears in \Cref{sec:method};
+\Cref{tab:reporting} summarizes what a comparison should specify.
+
+\begin{njubox}[title={The central question}]
+What changes, why should that change help, and which observation would show
+that it works? Use this space for one research question or one supported
+takeaway, then develop the evidence in the body of the report.
+\end{njubox}
+
+\section{Related Work}
+Organize prior work by the distinction relevant to the research question.
+Explain which assumptions, capabilities, or evaluation settings differ.
+For example, \citet{vaswani2017attention} can be cited as part of a sentence;
+a parenthetical citation uses the complementary form
+\citep{vaswani2017attention}. This reference demonstrates the bibliography style.
+
+\section{Method}
+\label{sec:method}
+Define the inputs, outputs, and assumptions, then describe the stages
+in \Cref{fig:workflow} in the order needed to reproduce the method.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  stage/.style={draw=LinkRule,line width=0.6pt,rounded corners=3pt,
+    minimum width=34mm,minimum height=17mm,align=left,inner sep=8pt,
+    text width=27mm,font=\sffamily\small,text=LinkNavy},
+  connector/.style={-{Stealth[length=2mm,width=1.4mm]},
+    draw=LinkMuted,line width=0.7pt}
+]
+  \node[stage,fill=LinkPanel] (question) at (0,0)
+    {{\color{LinkBlue}\scriptsize\bfseries 01}\quad\textbf{Question}\\[4pt]
+     {\scriptsize Scope and assumptions}};
+  \node[stage,fill=LinkLavender] (method) at (4.05,0)
+    {{\color{LinkPurple}\scriptsize\bfseries 02}\quad\textbf{Method}\\[4pt]
+     {\scriptsize Inputs and mechanism}};
+  \node[stage,fill=LinkMint] (evidence) at (8.10,0)
+    {{\color{LinkTeal}\scriptsize\bfseries 03}\quad\textbf{Evidence}\\[4pt]
+     {\scriptsize Controls and analysis}};
+  \node[stage,fill=LinkSand] (release) at (12.15,0)
+    {{\color{LinkMuted}\scriptsize\bfseries 04}\quad\textbf{Release}\\[4pt]
+     {\scriptsize Code and limitations}};
+  \draw[connector] (question.east) -- (method.west);
+  \draw[connector] (method.east) -- (evidence.west);
+  \draw[connector] (evidence.east) -- (release.west);
+\end{tikzpicture}
+\caption{An illustrative research workflow. Colors identify stages and do not encode measured values.}
+\label{fig:workflow}
+\end{figure}
+
+\subsection{Notation and evaluation}
+For $N$ examples with individual scores $s_i$, the arithmetic mean is
+\begin{equation}
+  \overline{s}=\frac{1}{N}\sum_{i=1}^{N}s_i.
+  \label{eq:mean}
+\end{equation}
+For \Cref{eq:mean}, specify the score's unit and the handling of missing observations.
+
+\section{Experiments}
+State the data, baselines, and controlled variables before presenting results.
+\Cref{tab:reporting} demonstrates the table style without synthetic performance numbers.
+
+\begin{table}[htbp]
+\caption{A compact reporting checklist. Replace these rows with the study's own comparisons.}
+\label{tab:reporting}
+\centering\small
+\begin{tabularx}{\linewidth}{lYY}
+\toprule
+\rowcolor{LinkPanel}
+\textbf{Element} & \textbf{What to specify} & \textbf{Why it matters} \\
+\midrule
+Data & Source, split, and exclusions & Defines the evaluated population \\
+Comparison & Baselines and shared settings & Makes differences interpretable \\
+Measurement & Metric, unit, and aggregation & Connects values to the question \\
+Uncertainty & Repeats and variation & Shows the stability of the result \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Results and Analysis}
+Pair each claim with the comparison that supports it. Distinguish a measured
+difference from a proposed explanation of that difference.
+
+\section{Limitations}
+Describe the conditions under which the finding holds, the settings not
+evaluated, and the comparisons still needed.
+
+\section{Conclusion}
+Close with the supported finding, its practical implication, and the next experiment.
+
+% Add acknowledgments only when there is something to acknowledge.
+% \section*{Acknowledgments}
+
+\bibliographystyle{assets/plainnat}
+\bibliography{references}
+
+\clearpage
+\beginappendix
+\section{Reproducibility Details}
+\label{app:details}
+Use the appendix for configurations, additional analyses, and details needed
+to reproduce the study. Appendix sections use lettered numbering; they can be
+referenced from the main text with the same cross-reference commands.
+
+\subsection{Configuration record}
+Record the information required to connect the result to a specific run:
+\begin{enumerate}
+  \item the version of the data and the rule used to construct each split;
+  \item the implementation version, configuration, and random seeds;
+  \item the evaluation script, metric definitions, and aggregation procedure.
+\end{enumerate}
+
+\begin{njubox}[title={Using this template}]
+Edit the title, authors, affiliations, and abstract at the beginning of
+\texttt{main.tex}. The original author, affiliation, abstract, and metadata
+commands are retained. The short Chinese starting point is \texttt{starter.tex};
+the README explains the available settings.
+\end{njubox}
+
+\subsection{Supporting material}
+Provide enough detail for another researcher to inspect the assumptions and
+repeat the analysis. Prefer descriptive figure captions and explicit units;
+use tables for comparisons and short paragraphs for interpretation.
+\end{document}

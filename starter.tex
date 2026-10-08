@@ -1,0 +1,49 @@
+% !TeX program = xelatex
+% 中文起步稿：Overleaf 设置 XeLaTeX，Main document 选择 starter.tex。
+\documentclass[10pt,chinese]{njulink}
+
+\njulinksetup{
+  type={研究报告},
+  id={NJU-LINK / RESEARCH NOTES},
+  short-title={NJU-LINK 研究报告},
+  subtitle={用清晰的结构连接问题、方法与证据},
+  keywords={研究问题；方法设计；实验评估}
+}
+\title{NJU-LINK 研究报告}
+\author[1]{作者姓名}
+\author[1]{合作者姓名}
+\affiliation[1]{NJU-LINK}
+\metadata[日期]{\today}
+% \contribution[*]{共同第一作者}
+% \correspondence{\email{name@example.org}}
+
+\abstract{在此概述研究问题、核心方法、主要证据与适用范围。
+摘要应当能够独立阅读，并与正文中的实际结果保持一致。
+这是一份可直接替换内容的起步模板；请在完成研究后填写具体结论。}
+
+\begin{document}
+\maketitle
+
+\section{研究背景}
+说明研究场景、已有方法的局限，以及本文需要回答的具体问题。
+模板支持中文、English、数学符号 $\mathcal{D}$ 与公式的混合排版。
+
+\begin{njubox}[title={研究要点}]
+用一至两句话写清楚研究问题，或总结一条已由实验支持的发现。
+\end{njubox}
+
+\section{方法}
+先定义输入、输出和假设，再介绍方法的主要步骤。
+例如，对 $N$ 个样本的得分 $s_i$，平均分定义为
+\begin{equation}
+  \overline{s}=\frac{1}{N}\sum_{i=1}^{N}s_i.
+\end{equation}
+
+\section{实验与讨论}
+描述数据、基线、评价指标和不确定性，并说明结论的适用范围。
+图、表、引用、附录与参考文献的完整示例见 \texttt{main.tex}。
+
+% 需要参考文献时，取消下列注释并在正文中添加 \citep{...} 或 \citet{...}。
+% \bibliographystyle{assets/plainnat}
+% \bibliography{references}
+\end{document}
