@@ -254,13 +254,11 @@
       \includegraphics[width=\njulink@logowidth]{\njulink@logo}
     \end{minipage}\hfill
     \begin{minipage}[c]{0.46\linewidth}\raggedleft
-      {\sffamily\fontsize{8}{11}\selectfont\bfseries\color{LinkNavy}
-       \MakeUppercase{\njulink@type}\par}
-      \ifdefempty{\njulink@id}{}{\vspace{3pt}
+      \ifdefempty{\njulink@id}{}{
         {\sffamily\fontsize{8}{10}\selectfont\color{LinkMuted}\njulink@id\par}}
     \end{minipage}\par
     \vspace{18pt}
-    {\raggedright\sffamily\fontsize{24}{29}\selectfont\bfseries
+    {\raggedright\sffamily\fontsize{20}{25}\selectfont\bfseries
       \color{LinkNavy}\titlelist\par}
     \ifdefempty{\njulink@subtitle}{}{\vspace{8pt}
       {\raggedright\sffamily\fontsize{11}{15}\selectfont

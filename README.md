@@ -100,7 +100,8 @@
 }
 ```
 
-可选字段设为空值即可隐藏。长标题可用 `\\` 手动换行，页眉使用简短的
+`type` 用于页脚，首页 Logo 右侧仅显示 `id`。可选字段设为空值即可隐藏。
+长标题可用 `\\` 手动换行，页眉使用简短的
 `short-title`。推荐单栏报告；需要双栏时使用 `\documentclass[twocolumn]{njulink}`，
 首页信息仍横跨两栏，正文中的宽图表请改用 `figure*` / `table*`。
 
@@ -110,6 +111,7 @@
 ## 样式与组件
 
 - 正文：TeX Gyre Pagella；标题与作者：TeX Gyre Heros；中文：Fandol。
+- 首页主标题为 20 pt，行距为 25 pt。
 - 深蓝 `LinkNavy`：`#233650`，取自 Logo 文字；蓝色 `LinkBlue`：`#4B6FF9`；
   紫色 `LinkPurple`：`#7561EA`。统一修改 `njulink.cls` 的颜色区即可换色。
 - 首页使用参考稿的浅灰色 `LinkTitlePanel`（`#F1F4F7`）、8 pt 圆角与 5 mm 左右内边距。
