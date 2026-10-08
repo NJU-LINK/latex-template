@@ -48,8 +48,10 @@
 | `starter.tex` | 可直接开始填写的中文简洁模板 |
 | `njulink.cls` | NJU-LINK 文档类，包含全部排版样式 |
 | `tokenwave.cls` | 旧类名的兼容入口，转交给 `njulink.cls` |
-| `figures/njulink-logo.png` | NJU-LINK Logo，保留原有比例与颜色 |
+| `figures/njulink-logo.png` | 白底 Logo，采用圆润的 LINK 字标 |
 | `figures/njulink-logo-transparent.png` | 浅灰首页与页眉使用的透明背景 Logo |
+| `figures/njulink-logo.svg` | 可编辑的 SVG 版本，字标已转为矢量路径 |
+| `assets/logo-font-OFL.txt` | Logo 字标使用的 Quicksand 字体许可 |
 | `references.bib` | 示例参考文献 |
 | `assets/plainnat.bst` | 原模板附带的参考文献样式，原样保留 |
 | `upstream/` | 原始 FAIR 与 TokenWave 类文件及说明，保留来源记录 |
@@ -111,6 +113,7 @@
 - 深蓝 `LinkNavy`：`#233650`，取自 Logo 文字；蓝色 `LinkBlue`：`#4B6FF9`；
   紫色 `LinkPurple`：`#7561EA`。统一修改 `njulink.cls` 的颜色区即可换色。
 - 首页使用参考稿的浅灰色 `LinkTitlePanel`（`#F1F4F7`）、8 pt 圆角与 5 mm 左右内边距。
+- 提示框使用 8 pt 圆角，流程图模块使用 6 pt 圆角。
 - 图表保持标准 `figure`、`table`、`equation` 与 `subfigure` 用法。
 - 表格使用 `booktabs` 和 `tabularx`，可用 `\rowcolor{LinkPanel}` 设置浅色表头。
 - 重点提示使用 `\begin{njubox}[title={Key idea}] ... \end{njubox}`。
@@ -118,7 +121,9 @@
 - 目录与 PDF 书签保留标准功能，可按需使用 `\tableofcontents`。
 
 正文粗体保持当前字体族，避免像原稿那样突然切换成无衬线字体。
-Logo 保持原有比例，透明背景版本用于浅灰首页与页眉；白底裁边版本一并保留。
+Logo 沿用原有蓝紫图形，LINK 字标使用 Quicksand Bold，并调整了字距与对齐。
+透明背景版本用于浅灰首页与页眉，白底 PNG 与 SVG 版本一并提供。
+SVG 的字标为矢量路径，左侧图形保留原图；无需安装字体即可使用。
 
 ## 本地编译
 
@@ -148,4 +153,6 @@ tectonic starter.tex
 （原作者标注为 dlp@meta.com），首页结构参考 Llama 3 论文 v3
 （[arXiv:2407.21783v3](https://arxiv.org/abs/2407.21783v3)）中的 `fairmeta.cls`。
 原始类文件及 README 保留在 `upstream/`，原参考文献样式保持不变。
-NJU-LINK Logo 保留原有颜色、比例与渐变细节。
+NJU-LINK Logo 左侧图形保留原有颜色与渐变细节，LINK 字标基于
+[Quicksand](https://github.com/google/fonts/tree/main/ofl/quicksand) Bold 调整，
+字体许可见 [SIL Open Font License](assets/logo-font-OFL.txt)。

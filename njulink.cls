@@ -295,7 +295,7 @@
   \thispagestyle{firstpage}}
 
 \tcbset{njulink panel/.style={enhanced,breakable,boxrule=0pt,
-  frame hidden,sharp corners,left=12pt,right=12pt,top=10pt,bottom=10pt,
+  frame hidden,arc=8pt,outer arc=8pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
   before skip=10pt,after skip=10pt,coltext=LinkText,
   parbox=false}}
 \newenvironment{abstractbox}
