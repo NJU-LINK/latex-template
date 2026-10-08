@@ -85,7 +85,7 @@
 
 % Public metadata API. Leave a key empty to hide the corresponding field.
 \def\njulink@type{Technical Report}
-\def\njulink@id{}
+\def\njulink@id{} % Legacy key retained for compatibility; no longer displayed.
 \def\njulink@version{}
 \def\njulink@subtitle{}
 \def\njulink@shorttitle{NJU-LINK Technical Report}
@@ -252,10 +252,6 @@
     \setlength{\parskip}{0pt}
     \noindent\begin{minipage}[c]{0.50\linewidth}
       \includegraphics[width=\njulink@logowidth]{\njulink@logo}
-    \end{minipage}\hfill
-    \begin{minipage}[c]{0.46\linewidth}\raggedleft
-      \ifdefempty{\njulink@id}{}{
-        {\sffamily\fontsize{8}{10}\selectfont\color{LinkMuted}\njulink@id\par}}
     \end{minipage}\par
     \vspace{18pt}
     {\raggedright\sffamily\fontsize{20}{25}\selectfont\bfseries
