@@ -71,6 +71,7 @@
 \definecolor{LinkMuted}{HTML}{66758B}
 \definecolor{LinkRule}{HTML}{DCE2EE}
 \definecolor{LinkPanel}{HTML}{F3F5FC}
+\definecolor{LinkTitlePanel}{HTML}{F1F4F7}
 \definecolor{LinkLavender}{HTML}{F4F1FC}
 \definecolor{LinkTeal}{HTML}{368D87}
 \definecolor{LinkMint}{HTML}{EFF8F5}
@@ -89,8 +90,8 @@
 \def\njulink@subtitle{}
 \def\njulink@shorttitle{NJU-LINK Technical Report}
 \def\njulink@keywords{}
-\def\njulink@logo{figures/njulink-logo.png}
-\def\njulink@logowidth{35mm}
+\def\njulink@logo{figures/njulink-logo-transparent.png}
+\def\njulink@logowidth{30mm}
 \pgfkeys{/njulink/.is family,/njulink,
   type/.store in=\njulink@type,
   id/.store in=\njulink@id,
@@ -192,11 +193,6 @@
 \fancypagestyle{firstpage}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}
 \fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}
 
-\newcommand{\njulink@accentline}{\par\nointerlineskip
-  \hbox to\linewidth{\color{LinkBlue}\rule{25mm}{1.1pt}%
-    \color{LinkPurple}\rule{12mm}{1.1pt}%
-    \color{LinkRule}\leaders\hrule height 0.4pt\hfill}\par}
-
 % Front-matter API retained from FAIR / TokenWave, with unexpanded storage.
 % Empty optional identifiers do not leave stray superscripts or separators.
 \newcommand{\authorlist}{}
@@ -211,7 +207,7 @@
 \newcommand{\affiliationformat}[2][]{\njulink@sup{#1}\,#2}
 \newcommand{\contributionformat}[2][]{\njulink@sup{#1}\,#2}
 \newcommand{\metadataformat}[2][]{%
-  \ifstrempty{#1}{}{\textbf{#1}\enspace}#2}
+  \ifstrempty{#1}{}{\textbf{#1:}\enspace}#2}
 \renewcommand{\author}[2][]{%
   \ifdefempty{\authorlist}{}{\gappto\authorlist{\quad}}
   \gappto\authorlist{\authorformat[#1]{#2}}
@@ -242,8 +238,16 @@
   \phantomsection
   \addcontentsline{toc}{section}{\refname}}
 
-% A white masthead and a tinted abstract replace the original all-in-one box.
+% The Llama 3 v3 front-matter layout: one light-gray rounded panel, with
+% the abstract following the authors and the metadata at the bottom.
+% The original fairmeta.cls is retained in upstream/ for attribution.
+\tcbset{njulink title panel/.style={enhanced,breakable,boxrule=0pt,
+  frame hidden,arc=8pt,outer arc=8pt,colback=LinkTitlePanel,coltext=LinkText,
+  boxsep=0pt,left=5mm,right=5mm,top=5mm,bottom=8mm,
+  before skip=0pt,after skip=9pt,parbox=false}}
+\newtcolorbox{njulinktitlebox}{njulink title panel}
 \newcommand{\mymaketitle}{%
+  \begin{njulinktitlebox}
   \begingroup
     \setlength{\parskip}{0pt}
     \noindent\begin{minipage}[c]{0.50\linewidth}
@@ -255,38 +259,32 @@
       \ifdefempty{\njulink@id}{}{\vspace{3pt}
         {\sffamily\fontsize{8}{10}\selectfont\color{LinkMuted}\njulink@id\par}}
     \end{minipage}\par
-    \vspace{21pt}
-    {\raggedright\sffamily\fontsize{27}{31}\selectfont\bfseries
+    \vspace{18pt}
+    {\raggedright\sffamily\fontsize{24}{29}\selectfont\bfseries
       \color{LinkNavy}\titlelist\par}
     \ifdefempty{\njulink@subtitle}{}{\vspace{8pt}
       {\raggedright\sffamily\fontsize{11}{15}\selectfont
         \color{LinkMuted}\njulink@subtitle\par}}
-    \ifdefempty{\authorlist}{}{\vspace{15pt}
+    \ifdefempty{\authorlist}{}{\vspace{13pt}
       {\raggedright\sffamily\fontsize{10}{14}\selectfont\bfseries
         \color{LinkNavy}\authorlist\par}}
     \ifdefempty{\affiliationlist}{}{\vspace{4pt}
       {\raggedright\small\color{LinkMuted}\affiliationlist\par}}
     \ifdefempty{\contributionlist}{}{\vspace{3pt}
       {\raggedright\footnotesize\color{LinkMuted}\contributionlist\par}}
-    \ifdefempty{\metadatalist}{}{\vspace{9pt}
+    \ifdefempty{\abstractlist}{}{\par\vspace{15pt}
+      {\normalfont\normalsize\color{LinkText}\abstractlist\par}
+      \ifdefempty{\njulink@keywords}{}{\par\vspace{8pt}
+        {\sffamily\fontsize{8}{11}\selectfont\color{LinkMuted}
+         \textbf{\njulink@keywordsname}\enspace\njulink@keywords\par}}}
+    \ifdefempty{\metadatalist}{}{\vspace{18pt}
       {\raggedright\sffamily\fontsize{8}{11}\selectfont
         \color{LinkMuted}\metadatalist\par}}
     \ifdefempty{\njulink@version}{}{\vspace{3pt}
       {\sffamily\fontsize{8}{11}\selectfont\color{LinkMuted}
         \njulink@version\par}}
-    \vspace{13pt}
-    \njulink@accentline
   \endgroup
-  \ifdefempty{\abstractlist}{}{%
-    \begin{abstractbox}
-      {\sffamily\fontsize{8.5}{11}\selectfont\bfseries
-       \color{LinkNavy}\MakeUppercase{\abstractname}\par}\vspace{5pt}
-      \abstractlist
-      \ifdefempty{\njulink@keywords}{}{\par\vspace{6pt}
-        {\sffamily\fontsize{8}{11}\selectfont\color{LinkMuted}
-         \textbf{\njulink@keywordsname}\enspace\njulink@keywords}}
-    \end{abstractbox}}
-  \par\vspace{3pt}
+  \end{njulinktitlebox}
 }
 \renewcommand{\maketitle}{%
   \if@twocolumn
@@ -301,7 +299,8 @@
   before skip=10pt,after skip=10pt,coltext=LinkText,
   parbox=false}}
 \newenvironment{abstractbox}
-  {\begin{tcolorbox}[njulink panel,colback=LinkPanel]\small}
+  {\begin{tcolorbox}[njulink title panel,top=5mm,bottom=5mm,
+    before skip=10pt,after skip=10pt]\normalsize}
   {\end{tcolorbox}}
 \newtcolorbox{njubox}[1][]{njulink panel,
   colback=LinkLavender,
