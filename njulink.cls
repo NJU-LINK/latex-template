@@ -23,7 +23,7 @@
   \RequirePackage[utf8]{inputenc}
   \RequirePackage[T1]{fontenc}
   \RequirePackage{tgpagella}
-  \RequirePackage[scaled=0.94]{tgheros}
+  \RequirePackage[scale=0.94]{tgheros}
   \RequirePackage[scaled=0.92]{inconsolata}
 \else
   \RequirePackage[UTF8,scheme=plain,fontset=fandol]{ctex}
@@ -117,6 +117,8 @@
   \renewcommand{\tablename}{表}
   \def\njulink@keywordsname{关键词}
   \def\njulink@notename{研究要点}
+  \def\njulink@datename{日期}
+  \def\njulink@correspondencename{通讯作者}
   \def\njulink@type{研究报告}
 \else
   \renewcommand{\abstractname}{Abstract}
@@ -125,6 +127,8 @@
   \renewcommand{\tablename}{Table}
   \def\njulink@keywordsname{Keywords}
   \def\njulink@notename{Key takeaway}
+  \def\njulink@datename{Date}
+  \def\njulink@correspondencename{Correspondence}
 \fi
 
 \setlength{\parindent}{0pt}
@@ -185,7 +189,7 @@
 \renewcommand{\headrule}{{\color{LinkRule}\hrule
   \@height\headrulewidth\@width\headwidth\vskip-\headrulewidth}}
 \fancyfoot[L]{\sffamily\fontsize{8}{10}\selectfont
-  \textcolor{LinkMuted}{\linkbrand\linkseparator\njulink@type}}
+  \textcolor{LinkMuted}{\ifdefempty{\njulink@type}{}{\linkbrand\linkseparator\njulink@type}}}
 \fancyfoot[R]{\sffamily\fontsize{8}{10}\selectfont
   \textcolor{LinkNavy}{\thepage}\enspace
   \textcolor{LinkMuted}{/\enspace\pageref*{LastPage}}}
@@ -223,8 +227,8 @@
   \ifstrempty{#2}{}{%
     \ifdefempty{\metadatalist}{}{\gappto\metadatalist{\par}}
     \gappto\metadatalist{\metadataformat[#1]{#2}}}}
-\renewcommand{\date}[1]{\metadata[Date]{#1}}
-\newcommand{\correspondence}[1]{\metadata[Correspondence]{#1}}
+\renewcommand{\date}[1]{\metadata[\njulink@datename]{#1}}
+\newcommand{\correspondence}[1]{\metadata[\njulink@correspondencename]{#1}}
 \renewcommand{\abstract}[1]{\gdef\abstractlist{#1}}
 \renewcommand{\title}[1]{\gdef\titlelist{#1}\gdef\@title{#1}}
 \newcommand{\nm}[1]{#1}
@@ -342,8 +346,19 @@
   \Crefname{equation}{Equation}{Equations}
 \fi
 
-\AtBeginDocument{\color{LinkText}
+\AtBeginDocument{%
+  % cleveref initializes its language conjunctions at the start of the document.
+  \ifnjulink@chinese
+    \renewcommand{\crefpairconjunction}{和}
+    \renewcommand{\crefmiddleconjunction}{、}
+    \renewcommand{\creflastconjunction}{和}
+    \renewcommand{\crefpairgroupconjunction}{和}
+    \renewcommand{\crefmiddlegroupconjunction}{、}
+    \renewcommand{\creflastgroupconjunction}{和}
+    \renewcommand{\crefrangeconjunction}{至}
+  \fi
+  \color{LinkText}
   \setlength{\abovedisplayskip}{7pt plus 2pt minus 2pt}
   \setlength{\belowdisplayskip}{7pt plus 2pt minus 2pt}
-  \hypersetup{pdftitle={\njulink@shorttitle},pdfauthor={\njulink@pdfauthors}}}
+  \hypersetup{pdftitle={\titlelist},pdfauthor={\njulink@pdfauthors}}}
 \endinput

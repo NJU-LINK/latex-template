@@ -63,18 +63,20 @@
 ```tex
 \documentclass{njulink}
 \title{Your Paper Title}
-\author[1,2]{First Author}
-\author[1]{Second Author}
+\author[1,2,*]{First Author}
+\author[1,*]{Second Author}
+\author[1,\dagger]{Third Author}
 \affiliation[1]{NJU-LINK}
 \affiliation[2]{Another Institution}
 \contribution[*]{Equal contribution}
+\contribution[\dagger]{Corresponding author}
 \abstract{Your abstract.}
-\correspondence{First Author at \email{name@example.org}}
+\correspondence{Third Author at \email{name@example.org}}
 \date{\today}
 \metadata[Code]{\url{https://example.org/project}}
 ```
 
-每位作者单独调用一次 `\author`，角标用于对应单位或贡献说明。
+每位作者单独调用一次 `\author`，角标用于对应单位或贡献说明；共同一作与通讯作者的符号应与作者角标一致。
 无须显示的元信息直接删除或注释该行；不再默认放置空贡献脚注。
 `\maketitle` 在一个浅灰圆角块中依次输出 Logo、标题、作者信息、摘要与元信息。
 摘要使用正文字号，关键词接在摘要后，日期和链接等元信息位于框底。
@@ -99,13 +101,15 @@
 }
 ```
 
-首页顶部仅在左侧显示 Logo。`type` 用于页脚，可选字段设为空值即可隐藏。
-长标题可用 `\\` 手动换行，页眉使用简短的
-`short-title`。推荐单栏报告；需要双栏时使用 `\documentclass[twocolumn]{njulink}`，
+首页顶部仅在左侧显示 Logo。`type` 指定左页脚的报告类型；设为 `type={}`
+可关闭整个左页脚（含 NJU-LINK 与分隔符），页码保留。其他可选字段设为空值即可隐藏。
+完整的 `\title{...}` 用于 PDF 标题属性，`short-title` 仅用于页眉。
+长标题可用 `\\` 手动换行。推荐单栏报告；需要双栏时使用 `\documentclass[twocolumn]{njulink}`，
 首页信息仍横跨两栏，正文中的宽图表请改用 `figure*` / `table*`。
 
 中文模式使用 `\documentclass[chinese]{njulink}`，图、表、附录及参考文献标题
-和关键词标签会切换为中文。XeLaTeX 下的英文模式也支持正文中穿插中文。
+以及关键词、日期、通讯作者标签和交叉引用连接词会切换为中文。
+XeLaTeX 下的英文模式也支持正文中穿插中文。
 
 ## 样式与组件
 
